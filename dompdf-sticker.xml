@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ASCII"?>
+<!DOCTYPE sticker SYSTEM "vad_sticker.dtd">
+<sticker version="1.0" xml:lang="en-UK">
+<caption>
+  <name package="dompdf">
+    <prop name="Title" value="DOMPDF is a CSS 2.1 compliant HTML to PDF converter"/>
+    <prop name="Developer" value="Fabien Menager, Brian Sweeney"/>
+    <prop name="Copyright" value="(C) 2013 Fabien Menager, Brian Sweeney"/>
+    <prop name="Download" value="https://github.com/dompdf/dompdf"/>
+  </name>
+  <version package="1.0">
+    <prop name="Release Date" value="$PACKDATE$"/>
+    <prop name="Build" value="Release, optimized"/>
+  </version>
+</caption>
+<dependencies />
+<procedures uninstallation="supported">
+  <sql purpose="pre-install"></sql>
+  <sql purpose="post-install">
+    <![CDATA[
+      -- Create a VDir in the default vhost
+      DB.DBA.VHOST_REMOVE (lpath=>'/dompdf');
+      DB.DBA.VHOST_DEFINE (lpath=>'/dompdf', ppath=>'/vad/vsp/dompdf', vsp_user=>'dba', is_dav=>0, is_brws=>0, def_page=>'genpdf.php');
+    ]]>
+  </sql>
+</procedures>
+<ddls>
+  <sql purpose="pre-install"></sql>
+  <sql purpose="post-install"></sql>
+  <sql purpose="pre-uninstall"></sql>
+</ddls>
+<resources>
+  <!-- source files -->
+  <file type="http" source_uri="**/*.php" target_uri="dompdf/" />
+  <file type="http" source_uri="**/*.html" target_uri="dompdf/" />
+  <file type="http" source_uri="**/*.js" target_uri="dompdf/" />
+  <file type="http" source_uri="**/*.css" target_uri="dompdf/" />
+
+  <!-- fonts -->
+  <file type="http" source_uri="**/*.ttf" target_uri="dompdf/" />
+  <file type="http" source_uri="**/*.ufm" target_uri="dompdf/" />
+  <file type="http" source_uri="**/*.afm" target_uri="dompdf/" />
+
+  <!-- Images -->
+  <file type="http" source_uri="**/*.gif" target_uri="dompdf/" />
+  <file type="http" source_uri="**/*.png" target_uri="dompdf/" />
+  <file type="http" source_uri="**/*.ico" target_uri="dompdf/" />
+  <file type="http" source_uri="**/*.jpg" target_uri="dompdf/" />
+  <file type="http" source_uri="**/*.bmp" target_uri="dompdf/" />
+
+  <!-- Misc -->
+  <file type="http" source_uri="**/*.map" target_uri="dompdf/" />
+  <file type="http" source_uri="**/*.ser" target_uri="dompdf/" />
+</resources>
+<registry>
+</registry>
+</sticker>
